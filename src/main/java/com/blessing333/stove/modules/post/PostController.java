@@ -35,6 +35,6 @@ public class PostController {
     @PostMapping(POST_URL)
     public String addNewPost(@ModelAttribute PostForm postForm, HttpSession httpSession){
         Long addedPostId = postService.addNewPost(postForm);
-        return "redirect:post/" + addedPostId;
+        return "redirect:/post/" + addedPostId;
     }
 }
