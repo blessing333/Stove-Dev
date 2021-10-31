@@ -1,16 +1,14 @@
-body {
-    position: relative;
-    overflow-x: hidden;
-}
+
+
+
+/*-------------------------------*/
+/*           Wrappers            */
+/*-------------------------------*/
 body,
 html { height: 100%;}
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {background-color: transparent;}
-
-/*-------------------------------*/
-/*           Wrappers            */
-/*-------------------------------*/
 
 #wrapper {
     padding-left: 0;
@@ -291,6 +289,35 @@ html { height: 100%;}
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(250,250,250,.8);
+    background-color: rgba(250, 250, 250, .8);
     z-index: 1;
 }
+
+.dashboard_menu .nav-tabs li.nav-item a.active {
+    background-color: #FF324D;
+    color: #fff;
+}
+.dashboard_menu .nav-tabs li.nav-item a i {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.dashboard_content {
+    margin: 0;
+}
+.dashboard_content .card-header {
+    background-color: transparent;
+    border-color: #f0f0f0;
+}
+.dashboard_content .card-header * {
+    margin: 0;
+}
+.dashboard_content .card {
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 0px 4px 0 #e9e9e9;
+}
+.dashboard_content .card-body p:last-child {
+    margin: 0;
+}
+
+

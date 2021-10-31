@@ -4,7 +4,7 @@ spring:
       filter:
         enabled: true
   datasource:
-    url: jdbc:h2:mem:localtest
+    url: jdbc:h2:mem:stove
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -15,6 +15,9 @@ spring:
       hibernate:
       #show_sql: true
       format_sql: true
+  h2:
+    console:
+      enabled: true
 
 logging.level:
   org.hibernate.SQL: debug
