@@ -30,7 +30,14 @@ class PostControllerTest {
     }
 
     @Test
-    void createPostView() {
+    @DisplayName("게시글 조회 화면 생성")
+    void createPostView() throws Exception{
+        PostForm postForm = PostServiceTest.createPostForm();
+        Long postId = postService.addNewPost(postForm);
+        mockMvc.perform(get("/post/" + postId))
+                .andExpect(model().hasNoErrors())
+                .andExpect(model().attributeExists("post"))
+                .andExpect(view().name("post/post"));
     }
 
     @Test
@@ -44,6 +51,5 @@ class PostControllerTest {
                 .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(model().hasNoErrors());
-
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
 *
-* 블로그의 게시글을 표현하는 JPA Entity
+* 블로그의 게시글을 표현하는 JPA Entity Class
 *
 * @author Minjae Lee
 * @version 0.0.0
@@ -34,18 +34,25 @@ public class Post {
 
     private LocalDateTime createdDate;
 
-    private boolean published;
+    private boolean privatePost;
 
     private boolean deleted;
 
-    public static Post createNewPost(String title,String content,String author,boolean published){
+    public static Post createNewPost(String title,String content,String author,boolean isPrivatePost){
         Post instance = new Post();
         instance.setTitle(title);
         instance.setContent(content);
         instance.setAuthor(author);
         instance.setCreatedDate(LocalDateTime.now());
-        instance.setPublished(published);
+        instance.setPrivatePost(isPrivatePost);
         instance.setDeleted(false);
         return instance;
+    }
+    public void editPostInformation(String title,String content,String author,boolean isPrivatePost){
+        setTitle(title);
+        setContent(content);
+        setAuthor(author);
+        setCreatedDate(LocalDateTime.now());
+        setPrivatePost(isPrivatePost);
     }
 }

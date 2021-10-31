@@ -37,7 +37,7 @@ class PostServiceTest {
         assertThat(post.getTitle()).isEqualTo(POST_TITLE);
         assertThat(post.getAuthor()).isEqualTo(POST_AUTHOR);
         assertThat(post.getContent()).isEqualTo(POST_CONTENT);
-        assertThat(post.isPublished()).isEqualTo(POST_PUBLISH);
+        assertThat(post.isPrivatePost()).isEqualTo(POST_PUBLISH);
         assertThat(post.isDeleted()).isFalse();
     }
 
@@ -55,7 +55,7 @@ class PostServiceTest {
         assertThat(post.getTitle()).isEqualTo(postForm.getTitle());
         assertThat(post.getAuthor()).isEqualTo(postForm.getAuthor());
         assertThat(post.getContent()).isEqualTo(postForm.getContent());
-        assertThat(post.isPublished()).isEqualTo(postForm.isPrivatePost());
+        assertThat(post.isPrivatePost()).isEqualTo(postForm.isPrivatePost());
     }
 
     @Test

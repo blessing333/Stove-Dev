@@ -1,165 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <!-- SITE TITLE -->
-    <title>Stove Blog</title>
-    <!--FONT -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html::head"> </head>
+<style>
+    .post-info span,a{
+        display: inline-block;
+        margin-right: 10px;
+        color: #687188;
+    }
+    .post-container{
+        display: flex;
+        margin-left: 0;
+        padding: 50px;
+        background-color: white;
+        width: border-box;
+        /*margin-left: -10px;*/
+    }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href=/node_modules/summernote/dist/summernote-lite.css>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <!--script-->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <style>
-        .container{
-            padding-top: 50px;
-        }
-        .card-header{
-            padding-bottom: 20px;
-        }
-        .card-body label{
-            font-size: 20px;
-            color: #333;
-            padding-bottom: 5px;
-        }
+    .post-content {
+        margin-top: 15px;
+    }
 
-        .card-body label .required {
-            color: #ff0000;
-        }
-
-        .form-group input{
-            height: 40px;
-        }
-    </style>
-
-</head>
-
+</style>
 <body>
-<!-- START MAIN CONTENT -->
-<div class="main_content">
-    <!-- START SECTION SHOP -->
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class ="dashboard_content">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>게시글 작성</h3>
-                            </div>
-                            <div class="card-body">
-                                <!--                            <div class="row">-->
-                                <!--                                <div class="form-group col-md-12 col-lg-12">-->
-                                <!--                                    <label for="product_img">상품 이미지<span class="required">*</span></label>-->
-                                <!--                                </div>-->
-                                <!--                            </div>-->
-                                <!--                            <div class="row">-->
-                                <!--                                <div class="col-lg-6 col-md-6">-->
-                                <!--                                    <div id="current-profile-image" class="product-image">-->
-                                <!--                                        <div id="product_img" class="product_img_box">-->
-                                <!--&lt;!&ndash;                                            <img th:if="${#strings.isEmpty(postForm.thumbnail)}"  src='/assets/images/product_img1.jpg'/>&ndash;&gt;-->
-                                <!--&lt;!&ndash;                                            <img th:if="${!#strings.isEmpty(postForm.thumbnail)}" th:src="${postForm.thumbnail}"/>&ndash;&gt;-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div id="new-profile-image" class="mt-3"></div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="col-lg-6 col-md-6">-->
-                                <!--                                    <div class="custom-file">-->
-                                <!--                                        <input type="file" class="custom-file-input" id="profile-image-file">-->
-                                <!--                                        <label class="custom-file-label" for="profile-image-file">상품 이미지 변경</label>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div id="new-profile-image-control" class="mt-3">-->
-                                <!--                                        <button class="btn btn-outline-primary btn-block" id="cut-button">자르기</button>-->
-                                <!--                                        <button class="btn btn-outline-success btn-block" id="confirm-button">확인</button>-->
-                                <!--                                        <button class="btn btn-outline-warning btn-block" id="reset-button">취소</button>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div id="cropped-new-profile-image" class="mt-3"></div>-->
-                                <!--                                </div>-->
-                                <!--                            </div>-->
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav th:replace="fragments.html::side-menu"></nav>
 
-                                <form  class="needs-validation" method="post" th:action="@{/post}" name="postForm" th:object="${postForm}">
-                                    <!--                                <div class="row">-->
-                                    <!--                                    <div class="form-group col-md-12">-->
-                                    <!--                                        <input id="profileImage" type="hidden" th:field="*{thumbnail}" class="form-control" />-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
-
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for="title">제목<span class="required">*</span></label>
-                                            <input id = "title" class="form-control" type="text" th:field="*{title}" placeholder="제목을 입력해주세요" required min="2" max="20">
-                                            <small class="invalid-feedback">제목을 입력하세요.</small>
-                                        </div>
-                                    </div>
-
-                                    <!--                                <div class="row">-->
-                                    <!--                                    <div class="form-group col-md-12">-->
-                                    <!--                                        <div id="recommend-tag-list" th:text="${recommendTagList}" hidden></div>-->
-
-                                    <!--                                        <label for="tags"> 상품 태그<span class="required">*</span></label>-->
-                                    <!--                                        <input id="tags" type="text" name="tagsWithJsonString" class="tagify-outside"/>-->
-                                    <!--                                            <p class="form-text text-muted">-->
-                                    <!--                                                -태그는 ,(콤마) 혹은 엔터로 구분되며 최대 3개까지 설정할 수 있습니다.<br/>-->
-                                    <!--                                                -태그는 검색의 부가정보로 사용되며, 해당 태그를 관심 태그로 설정한 유저에게 알림이 발송됩니다.<br/>-->
-                                    <!--                                                -검색 광고는 태그정보를 기준으로 노출됩니다.<br/>-->
-                                    <!--                                                -상품과 관련이 없는 내용을 입력하면 상품이 삭제되거나 서비스 이용에 제제를 받을 수 있습니다.<br/>-->
-                                    <!--                                            </p>-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
-
-                                    <!--                                <div class="row">-->
-                                    <!--                                    <div class="form-group col-md-12">-->
-                                    <!--                                        <div id="city-list" th:text="${cityList}" hidden></div>-->
-                                    <!--                                        <label for="zones"> 거래 지역<span class="required">*</span></label>-->
-                                    <!--                                        <input id="zones" type="text" name="zonesWithJsonString" class="tagify-outside"/>-->
-                                    <!--                                        <p id="zones-help" class="form-text text-muted">-->
-                                    <!--                                            주로 거래하는 지역을 입력하세요.-->
-                                    <!--                                        </p>-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
-                                    <div class="row" hidden>
-                                        <div class="form-group col-md-12">
-                                            <label for="author">작성자 <span class="required">*</span></label>
-                                            <input id="author" class="form-control" type="text" th:field="*{author}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for="summernote">게시글 내용<span class="required">*</span></label>
-                                            <textarea id="summernote" type="textarea" th:field="*{content}" class="form-control"
-                                                      aria-describedby="descriptionHelp" required></textarea>
-                                        </div>
-                                    </div>
-
-                                    <input type="checkbox" class ="publish-check" th:field ="*{privatePost}"/> 해당 개시글을 비공개로 게시합니다
-
-                                    <div class="col-md-12" style="padding-left: 0; padding-top: 10px;padding-bottom: 60px">
-                                        <button id="submit-button" type="submit" class="btn btn-default submit-btn" name="submit" value="Submit" style="width: 80px;height: 30px">등록</button>
-                                    </div>
+    <!-- Page Content  -->
+    <div id="content">
+        <nav th:replace="fragments.html::header"></nav>
+        <div class="post-container">
+            <div class="post-section">
+                <div class="row">
+                    <div class="page-header">
+                        <h2 th:text="${post.title}"> 게시글 제목</h2>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 post-info">
+                                <span th:text="${post.author}">작성자</span> | &nbsp;
+                                <span th:text="${#temporals.format(post.createdDate,'yyyy-MM-dd HH:mm:ss')}"></span>|&nbsp;
+                                <a th:href="@{'/post/edit/'+${post.id}}">수정</a>&nbsp;|&nbsp;
+                                <form class="form-inline" th:action="@{'/post/'+${post.id}}" th:method="delete" style="display: inline">
+                                    <button class="transparent-btn btn" type="submit"><i class="fas fa-trash-alt"></i></button>
                                 </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row post-content">
+                    <p th:utext="${post.content}"></p>
+                </div>
+
+                <div class="row category_section">
+                    카테고리 들어갈곳
+                </div>
+
+                <div class="comments">
+                                <h5 class="product_tab_title">댓글 (<span th:text="${post.comments.size()}"></span>)</h5>
+                                <ul class="list_none comment_list mt-4">
+                                    <li th:each="comment: ${post.comments}">
+                                        <div class="comment_block">
+                                            <span class="review_author" th:text="${comment.writer.nickname}">Alea Brooks</span>
+                                            <form class="form-icon-button" th:action="@{'/comment/' + ${comment.id}}" th:method="delete"  sec:authorize="isAuthenticated()" th:if="${comment.isWriter(#authentication.principal)}">
+                                                <button class="btn-icon"><i class="ti-trash"></i> </button>
+                                            </form>
+                                            <p class="customer_meta">
+                                                <span class="comment-date" th:text="${#temporals.format(comment.createdDate,'yyyy-MM-dd HH:mm:ss')}">March 5, 2018</span>
+                                            </p>
+
+                                            <div class="description">
+                                                <p th:text="${comment.content}">Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                </div>
             </div>
         </div>
     </div>
-    <!-- END SECTION SHOP -->
-
 </div>
-<!-- END MAIN CONTENT -->
+
+<div th:replace="fragments.html::common-js"></div>
+<script th:replace="fragments.html::sidemenu-js"></script>
 
 
+<footer>
+
+</footer>
 </body>
-
 </html>
