@@ -38,7 +38,7 @@ a:focus {
     width: 100%;
     height: 1px;
     border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 /* ---------------------------------------------------
@@ -139,7 +139,8 @@ a.download {
 #content {
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
+
+    min-height: 20vh;
     transition: all 0.3s;
 }
 
@@ -205,8 +206,26 @@ a.download {
 /* ---------------------------------------------------
     COMENT STYLE
 ----------------------------------------------------- */
+.post-meta span,a{
+    margin-right: 10px;
+}
+.comment_form input{
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.list_none li {
+    list-style:none;
+}
+
+.comment_author {
+    color: #292b2c;
+    font-size: 17px;
+    font-weight: bolder;
+}
 .comment_list {
-    margin-bottom: 20px;
+    padding-left: 0;
+    margin-bottom: 10px;
 }
 .comments li {
     margin-bottom: 20px;
@@ -220,16 +239,34 @@ a.download {
     border-radius: 100%;
     max-width: 100px;
 }
-.comment_block {
-    /*padding-left: 120px;*/
-}
-.customer_meta {
-    margin-bottom: 5px;
+
+.comment-content {
+    font-size: 15px;
 }
 
 .comment-date {
+    font-size: 15px;
     font-style: italic;
+    color: darkgrey;
+    margin-bottom: 5px;
+}
+.review_form{
+    padding-bottom: 20px;
 }
 
+.review_form input{
+    width: 300px;
+}
+.btn-icon{
+    font-size: 12px;
+    border: 0;
+    outline: 0;
+    background-color: #FFFFFF;
+    color: black;
+}
+.form-icon-button{
+    display: inline;
+
+}
 
 

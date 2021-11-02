@@ -1,92 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments.html::head"> </head>
-<style>
-    .post-info span,a{
-        display: inline-block;
-        margin-right: 10px;
-        color: #687188;
-    }
-    .post-container{
-        display: flex;
-        margin-left: 0;
-        padding: 50px;
-        background-color: white;
-        width: border-box;
-        /*margin-left: -10px;*/
-    }
 
-    .post-content {
-        margin-top: 15px;
-    }
-
-</style>
 <body>
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav th:replace="fragments.html::side-menu"></nav>
-
     <!-- Page Content  -->
     <div id="content">
         <nav th:replace="fragments.html::header"></nav>
-        <div class="post-container">
-            <div class="post-section">
-                <div class="row">
-                    <div class="page-header">
-                        <h2 th:text="${post.title}"> 게시글 제목</h2>
-                        <div class="row">
-                            <div class="col-md-12 col-lg-12 post-info">
-                                <span th:text="${post.author}">작성자</span> | &nbsp;
-                                <span th:text="${#temporals.format(post.createdDate,'yyyy-MM-dd HH:mm:ss')}"></span>|&nbsp;
-                                <a th:href="@{'/post/edit/'+${post.id}}">수정</a>&nbsp;|&nbsp;
-                                <form class="form-inline" th:action="@{'/post/'+${post.id}}" th:method="delete" style="display: inline">
-                                    <button class="transparent-btn btn" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+        <div class="container" style="background-color:white;">
+            <div class="post-meta">
+                <h2 th:text="${post.title}"> 게시글 제목</h2>
+                <span th:text="${post.author}">작성자</span> | &nbsp;
+                <span th:text="${#temporals.format(post.createdDate,'yyyy-MM-dd HH:mm:ss')}"></span>&nbsp;|&nbsp;
+                <a th:href="@{'/post/edit/'+${post.id}}">수정</a>&nbsp;|
+                <form class="form-inline" th:action="@{'/post/'+${post.id}}" th:method="delete" style="display: inline">
+                    <button class="transparent-btn btn" type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </div>
+            <div class="line"></div>
 
+            <p th:utext="${post.content}" style="word-break: break-word;"></p>
+
+            <div class="line"></div>
+
+            <div class="comments-section">
+                <h5 class="comment_title">댓글 (<span th:text="${comments.size()}"></span>)</h5>
+                <div class="line"></div>
+                <ul class="list_none comment_list mt-4">
+                    <li th:each="comment: ${comments}">
+                        <div class="comment_block">
+                            <span class="comment_author" th:text="${comment.writer}">댓글 작성자</span>
+                            <form class="form-icon-button" th:action="@{'/comment/' + ${comment.id}}" th:method="delete" th:if="${session.user.isAdmin() || session.user.nickname == comment.writer}">
+                                <button class="btn btn-icon"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                            <p class="comment-date">
+                                <span th:text="${#temporals.format(comment.createdDate,'yyyy-MM-dd HH:mm:ss')}">댓글 작성 날짜</span>
+                            </p>
+
+                            <div class="comment-content">
+                                <p th:text="${comment.content}">댓글 내용</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row post-content">
-                    <p th:utext="${post.content}"></p>
-                </div>
-
-                <div class="row category_section">
-                    카테고리 들어갈곳
-                </div>
-
-                <div class="comments">
-                                <h5 class="product_tab_title">댓글 (<span th:text="${post.comments.size()}"></span>)</h5>
-                                <ul class="list_none comment_list mt-4">
-                                    <li th:each="comment: ${post.comments}">
-                                        <div class="comment_block">
-                                            <span class="review_author" th:text="${comment.writer.nickname}">Alea Brooks</span>
-                                            <form class="form-icon-button" th:action="@{'/comment/' + ${comment.id}}" th:method="delete"  sec:authorize="isAuthenticated()" th:if="${comment.isWriter(#authentication.principal)}">
-                                                <button class="btn-icon"><i class="ti-trash"></i> </button>
-                                            </form>
-                                            <p class="customer_meta">
-                                                <span class="comment-date" th:text="${#temporals.format(comment.createdDate,'yyyy-MM-dd HH:mm:ss')}">March 5, 2018</span>
-                                            </p>
-
-                                            <div class="description">
-                                                <p th:text="${comment.content}">Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                </div>
+                        <div class="line"></div>
+                    </li>
+                </ul>
             </div>
+
+            <div class="review_form">
+                <form class="mt-3" th:object="${commentForm}" th:action="@{'/comment'}" th:method="post">
+                    <input class="form-control" th:field = "*{post}" hidden>
+                    <input class="form-control" th:field = "*{writer}" placeholder="닉네임을 입력해주세요 *" required>
+                    <textarea required="required" placeholder="댓글을 남겨주세요 *" class="form-control" th:field="*{content}" rows="4" style=" height: 100px;"></textarea>
+                    <div class="line"></div>
+                    <button type="submit" class="btn" name="submit" value="Submit">댓글작성</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
 
 <div th:replace="fragments.html::common-js"></div>
 <script th:replace="fragments.html::sidemenu-js"></script>
-
-
-<footer>
-
-</footer>
 </body>
 </html>

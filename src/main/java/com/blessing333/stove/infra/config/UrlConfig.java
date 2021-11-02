@@ -10,4 +10,7 @@ public class UrlConfig {
     public static final String POST_CREATE_FORM_URL = POST_URL + "/post-form";
     public static final String POST_EDIT_URL = POST_URL + "/edit";
 
+    //comment url
+    public static final String COMMENT_URL = "/comment";
+
 }

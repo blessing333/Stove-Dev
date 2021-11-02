@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+
 /**
 *
 * 게시글 관련 서비스를 제공하는 클래스
@@ -18,7 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostService {
     private final PostRepository postRepository;
     private static final String POST_NOT_EXIST_MESSAGE = "존재하지 않거나 삭제된 게시글입니다.";
-    private static final String ACCESS_DENY_MESSAGE = "접근 권한이 없습니다.";
+
+    @PostConstruct
+    @Transactional
+    void createWelcomePost(){
+        Post post = Post.createNewPost("test","test","test",false);
+        postRepository.save(post);
+    }
 
     @Transactional
     public Long addNewPost(PostForm postForm) {

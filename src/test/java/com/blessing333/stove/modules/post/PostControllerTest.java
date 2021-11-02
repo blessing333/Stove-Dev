@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PostControllerTest {
     @Autowired MockMvc mockMvc;
     @Autowired PostService postService;
+    @Autowired PostCreateFactory postCreateFactory;
 
     @Test
     @DisplayName("게시글 등록화면 생성")
@@ -32,7 +33,7 @@ class PostControllerTest {
     @Test
     @DisplayName("게시글 조회 화면 생성")
     void createPostView() throws Exception{
-        PostForm postForm = PostServiceTest.createPostForm();
+        PostForm postForm = postCreateFactory.createPostForm();
         Long postId = postService.addNewPost(postForm);
         mockMvc.perform(get("/post/" + postId))
                 .andExpect(model().hasNoErrors())
@@ -42,7 +43,7 @@ class PostControllerTest {
 
     @Test
     void addNewPost() throws Exception{
-        PostForm postForm =  PostServiceTest.createPostForm();
+        PostForm postForm =  postCreateFactory.createPostForm();
         mockMvc.perform(post("/post")
                 .param("title",postForm.getTitle())
                 .param("author", postForm.getAuthor())

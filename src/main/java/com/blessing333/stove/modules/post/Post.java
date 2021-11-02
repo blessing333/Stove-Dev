@@ -36,7 +36,6 @@ public class Post {
 
     private boolean privatePost;
 
-    private boolean deleted;
 
     public static Post createNewPost(String title,String content,String author,boolean isPrivatePost){
         Post instance = new Post();
@@ -45,7 +44,6 @@ public class Post {
         instance.setAuthor(author);
         instance.setCreatedDate(LocalDateTime.now());
         instance.setPrivatePost(isPrivatePost);
-        instance.setDeleted(false);
         return instance;
     }
     public void editPostInformation(String title,String content,String author,boolean isPrivatePost){
