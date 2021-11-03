@@ -30,27 +30,30 @@ public class Post {
     @Lob @Basic(fetch = FetchType.EAGER)
     private String content;
 
+
     private String author;
 
     private LocalDateTime createdDate;
 
-    private boolean privatePost;
+    private boolean published;
 
-
-    public static Post createNewPost(String title,String content,String author,boolean isPrivatePost){
+    public static Post createNewPost(String title,String content,String author,boolean published){
         Post instance = new Post();
         instance.setTitle(title);
         instance.setContent(content);
         instance.setAuthor(author);
         instance.setCreatedDate(LocalDateTime.now());
-        instance.setPrivatePost(isPrivatePost);
+        instance.setPublished(published);
         return instance;
     }
-    public void editPostInformation(String title,String content,String author,boolean isPrivatePost){
+
+    public void editPostInformation(String title,String content,String author,boolean published){
         setTitle(title);
         setContent(content);
         setAuthor(author);
         setCreatedDate(LocalDateTime.now());
-        setPrivatePost(isPrivatePost);
+        setPublished(published);
     }
+
+
 }

@@ -9,7 +9,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -48,7 +47,7 @@ class PostControllerTest {
                 .param("title",postForm.getTitle())
                 .param("author", postForm.getAuthor())
                 .param("content",postForm.getContent())
-                .param("published",postForm.isPrivatePost()+"")
+                .param("published",postForm.isPublished()+"")
                 .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(model().hasNoErrors());

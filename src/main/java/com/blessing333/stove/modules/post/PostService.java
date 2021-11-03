@@ -1,10 +1,15 @@
 package com.blessing333.stove.modules.post;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
 *
@@ -24,14 +29,17 @@ public class PostService {
     @PostConstruct
     @Transactional
     void createWelcomePost(){
-        Post post = Post.createNewPost("test","test","test",false);
-        postRepository.save(post);
+        for (int i = 0; i < 40; i++) {
+            Post post = Post.createNewPost("test"+i,"test"+i,"test"+i,true);
+            postRepository.save(post);
+        }
+
     }
 
     @Transactional
     public Long addNewPost(PostForm postForm) {
         Post newPost = Post.createNewPost(postForm.getTitle(), postForm.getContent(),
-                                            postForm.getAuthor(),postForm.isPrivatePost());
+                                            postForm.getAuthor(),postForm.isPublished());
         postRepository.save(newPost);
         return  newPost.getId();
     }
@@ -54,4 +62,6 @@ public class PostService {
 
         return post.getId();
     }
+
+
 }

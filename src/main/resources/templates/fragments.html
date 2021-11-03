@@ -15,6 +15,19 @@
     <!--script-->
 
 </head>
+<div th:fragment="preloader" class="preloader">
+    <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+        <div class="indicator">
+            <svg width="16px" height="12px">
+                <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+        </div>
+    </div>
+</div>
+
 <nav th:fragment="side-menu" id="sidebar">
     <ul class="list-unstyled components">
         <p>카테고리 전체보기</p>
@@ -44,20 +57,20 @@
     </ul>
     <ul class="list-unstyled CTAs">
         <li>
-            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            <a th:href="@{/post/post-form}" class="download">새 글 작성</a>
         </li>
     </ul>
 </nav>
 
-<nav th:fragment="header" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav th:fragment="header" class="navbar navbar-expand-lg ">
     <div class="container-fluid">
         <div class="col-md-4">
-            <button type="button" id="sidebarCollapse" class="transparent-btn btn">
+            <button type="button" id="sidebarCollapse" class="active transparent-btn btn">
                 <i class="fas fa-bars fa-2x"></i>
             </button>
         </div>
         <div class="col-md-4 main-logo" style="display: flex;justify-content: center">
-            <a href="">Stove Dev Camp</a>
+            <a th:href="@{/}">Stove Dev Camp</a>
         </div>
         <div class="col-md-4" style="display: flex; justify-content: flex-end">
             <form>
@@ -79,13 +92,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <!-- Font awesome JS   -->
     <script src="https://kit.fontawesome.com/47226b30db.js" crossorigin="anonymous"></script>
+
 </div>
 
 <script th:fragment="sidemenu-js" type="text/javascript">
     $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
+        let sideButton = $('#sidebarCollapse');
+        sideButton.on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+        sideButton.trigger('click')
     });
 </script>
+
+<script th:fragment="preloader-js">
+    $(window).on('load', function() {
+        setTimeout(function(){
+            $('.preloader').addClass('preloader-deactivate');
+        }, 350);
+    });
+</script>
+
 </html>

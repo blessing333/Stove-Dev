@@ -6,6 +6,7 @@ import com.blessing333.stove.modules.comment.CommentService;
 import com.blessing333.stove.modules.user.User;
 import com.blessing333.stove.modules.user.UserConfig;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +32,18 @@ public class PostController {
     private static final String POST_VIEW_NAME = "post/post";
     private static final String POST_CREATE_FROM_VIEW_NAME = "post/post-form";
     private static final String POST_EDIT_VIEW_NAME = "post/post-edit";
+
     private final PostService postService;
     private final CommentService commentService;
+    private final ModelMapper modelMapper;
+
 
     @GetMapping(POST_CREATE_FORM_URL)
     public String createPostFormView(HttpSession httpSession, Model model){
         PostForm postForm = new PostForm();
         User loginUser = (User) httpSession.getAttribute(UserConfig.USER_INFO_SESSION_ATTRIBUTE_NAME);
         postForm.setAuthor(loginUser.getNickname());
+        postForm.setPublished(true);
         model.addAttribute(postForm);
         return POST_CREATE_FROM_VIEW_NAME;
     }
@@ -49,10 +54,10 @@ public class PostController {
         List<Comment> comments = commentService.loadCommentsByPost(post);
         CommentForm commentForm = new CommentForm();
         commentForm.setPost(post);
-
+        PostDTO postDTO = new PostDTO(post);
         model.addAttribute("comments",comments);
         model.addAttribute(commentForm);
-        model.addAttribute(post);
+        model.addAttribute("post",postDTO);
         return POST_VIEW_NAME;
     }
 
@@ -74,11 +79,7 @@ public class PostController {
     public String createPostEditView(@PathVariable Long postId, RedirectAttributes redirectAttributes,Model model){
         Post post = postService.loadPostInformationFromDB(postId);
         PostEditForm postEditForm = new PostEditForm();
-        postEditForm.setId(post.getId());
-        postEditForm.setTitle(post.getTitle());
-        postEditForm.setAuthor(post.getAuthor());
-        postEditForm.setContent(post.getContent());
-        postEditForm.setPrivatePost(post.isPrivatePost());
+        modelMapper.map(post,postEditForm);
         model.addAttribute(postEditForm);
         return POST_EDIT_VIEW_NAME;
     }

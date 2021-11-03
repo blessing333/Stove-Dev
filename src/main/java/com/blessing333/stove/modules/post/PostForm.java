@@ -20,5 +20,5 @@ public class PostForm {
     private String author;
     @NotBlank
     private String content;
-    private boolean privatePost;
+    private boolean published;
 }

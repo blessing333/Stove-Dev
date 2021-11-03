@@ -3,7 +3,6 @@ package com.blessing333.stove.modules.post;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -34,7 +33,7 @@ public class PostServiceTest {
         assertThat(post.getTitle()).isEqualTo(postForm.getTitle());
         assertThat(post.getAuthor()).isEqualTo(postForm.getAuthor());
         assertThat(post.getContent()).isEqualTo(postForm.getContent());
-        assertThat(post.isPrivatePost()).isEqualTo(postForm.isPrivatePost());
+        assertThat(post.isPublished()).isEqualTo(postForm.isPublished());
     }
 
     @Test
@@ -51,7 +50,7 @@ public class PostServiceTest {
         assertThat(post.getTitle()).isEqualTo(postForm.getTitle());
         assertThat(post.getAuthor()).isEqualTo(postForm.getAuthor());
         assertThat(post.getContent()).isEqualTo(postForm.getContent());
-        assertThat(post.isPrivatePost()).isEqualTo(postForm.isPrivatePost());
+        assertThat(post.isPublished()).isEqualTo(postForm.isPublished());
     }
 
     @Test

@@ -144,7 +144,8 @@
                                     </div>
                                 </div>
 
-                                <input type="checkbox" class ="publish-check" th:field ="*{privatePost}"/> 해당 개시글을 비공개로 게시합니다
+                                <input type="checkbox" class ="publish-check" th:field ="*{published}"/> 해당 개시글을 공개글로 게시합니다
+                                <small>체크를 해제하면 비공개글로 게시됩니다.</small>
 
                                 <div class="col-md-12" style="padding-left: 0; padding-top: 10px;padding-bottom: 60px">
                                     <button id="submit-button" type="submit" class="btn btn-default submit-btn" name="submit" value="Submit" style="width: 80px;height: 30px">등록</button>
@@ -164,11 +165,11 @@
 
 
 </body>
-<script src="/assets/js/jquery-1.12.4.min.js"></script>
 <script src="/node_modules/summernote/dist/summernote-lite.js"></script>
 <script type="application/javascript">
     $(function () {
         $('#summernote').summernote({
+            lang: 'ko-KR',
             toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'clear']],

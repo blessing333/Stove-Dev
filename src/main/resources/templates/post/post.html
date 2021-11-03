@@ -3,7 +3,9 @@
 <head th:replace="fragments.html::head"> </head>
 
 <body>
+<div th:replace="fragments.html::preloader"></div>
 <div class="wrapper">
+
     <!-- Sidebar  -->
     <nav th:replace="fragments.html::side-menu"></nav>
     <!-- Page Content  -->
@@ -21,7 +23,9 @@
             </div>
             <div class="line"></div>
 
-            <p th:utext="${post.content}" style="word-break: break-word;"></p>
+            <div class="post-content-section">
+                <p th:utext="${post.content}"></p>
+            </div>
 
             <div class="line"></div>
 
@@ -48,12 +52,11 @@
                 </ul>
             </div>
 
-            <div class="review_form">
+            <div class="comment-form">
                 <form class="mt-3" th:object="${commentForm}" th:action="@{'/comment'}" th:method="post">
                     <input class="form-control" th:field = "*{post}" hidden>
                     <input class="form-control" th:field = "*{writer}" placeholder="닉네임을 입력해주세요 *" required>
                     <textarea required="required" placeholder="댓글을 남겨주세요 *" class="form-control" th:field="*{content}" rows="4" style=" height: 100px;"></textarea>
-                    <div class="line"></div>
                     <button type="submit" class="btn" name="submit" value="Submit">댓글작성</button>
                 </form>
             </div>
@@ -64,5 +67,6 @@
 
 <div th:replace="fragments.html::common-js"></div>
 <script th:replace="fragments.html::sidemenu-js"></script>
+<script th:replace="fragments.html::preloader-js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ public class PostCreateFactory {
     public static final String POST_TITLE = "테스트 게시글 제목";
     public static final String POST_AUTHOR = "테스트 게시글 작성자";
     public static final String POST_CONTENT = "테스트 게시글 내용";
-    public static final boolean POST_PUBLISH = false;
+    public static final boolean POST_PUBLISH = true;
 
     @Autowired PostService postService;
     public Post createPost(){
@@ -24,7 +24,7 @@ public class PostCreateFactory {
         postForm.setTitle(POST_TITLE);
         postForm.setAuthor(POST_AUTHOR);
         postForm.setContent(POST_CONTENT);
-        postForm.setPrivatePost(POST_PUBLISH);
+        postForm.setPublished(POST_PUBLISH);
         return postForm;
     }
 }
