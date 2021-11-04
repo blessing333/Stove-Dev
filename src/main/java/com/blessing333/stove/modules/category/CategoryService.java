@@ -21,7 +21,7 @@ public class CategoryService {
     private static final String CATEGORY_NOT_EXIST_MESSAGE = "카테고리가 존재하지 않습니다" ;
     private final CategoryRepository categoryRepository;
     /*
-    * 어플리케이션 실행 시, 기본 카테고리를 생성해주는 메소드
+    * 애플리케이션 실행 시, 기본 카테고리를 생성해주는 메소드
     * */
     @PostConstruct
     public void initCategory(){

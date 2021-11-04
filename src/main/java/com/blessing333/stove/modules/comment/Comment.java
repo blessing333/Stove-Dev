@@ -18,10 +18,9 @@ import java.time.LocalDateTime;
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
-    @Id @GeneratedValue
+    @Id @GeneratedValue @Column(name = "COMMENT_ID")
     private Long id;
     private String writer;
-
 
     // 게시판과 댓글의 M:1 관계 설정.
     @ManyToOne(fetch = FetchType.LAZY)

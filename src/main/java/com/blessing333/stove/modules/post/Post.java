@@ -21,8 +21,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 
 public class Post {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue @Column(name = "POST_ID")
     private Long id;
 
     private String title;
@@ -30,7 +29,8 @@ public class Post {
     @Lob
     private String content;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
     private String author;

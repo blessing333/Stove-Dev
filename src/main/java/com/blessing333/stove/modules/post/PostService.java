@@ -2,12 +2,7 @@ package com.blessing333.stove.modules.post;
 
 import com.blessing333.stove.modules.category.Category;
 import com.blessing333.stove.modules.category.CategoryRepository;
-import com.blessing333.stove.modules.category.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,18 +23,16 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
-    private final CategoryService categoryService;
     private static final String POST_NOT_EXIST_MESSAGE = "존재하지 않거나 삭제된 게시글입니다.";
 
     @PostConstruct
     @Transactional
     void createWelcomePost(){
-        Category category = new Category("테스트 카테고리");
-       categoryRepository.save(category);
-        for (int i = 0; i < 40; i++) {
-            Post post = Post.createNewPost("test"+i,"test"+i,"test"+i,true,category,null);
-            postRepository.save(post);
-        }
+        Category category = new Category("기타");
+        categoryRepository.save(category);
+        Post post = Post.createNewPost("환영합니다!","블로그에 오신것을 환영합니다!","Admin",true,category,null);
+        postRepository.save(post);
+
     }
 
     @Transactional
