@@ -22,15 +22,16 @@ import java.util.stream.Collectors;
 public class WebConfig  implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //스트링 부트에 설정된 기본 정적 파일 패스를 List에 저장
         List<String> staticResourcePath = Arrays.stream(StaticResourceLocation.values())
                 .flatMap(StaticResourceLocation::getPatterns)
                 .collect(Collectors.toList());
-
         staticResourcePath.add("/node_modules/**");
         staticResourcePath.add("/assets/**");
 
         registry.addInterceptor(new LoginSessionCheckInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns(staticResourcePath); //static resource에 대해 인터셉터 적용 제
+                .excludePathPatterns("/error") //  에러페이지는 인터셉터 적용 제외
+                .excludePathPatterns(staticResourcePath); //static resource에 대해 인터셉터 적용 제외
     }
 }

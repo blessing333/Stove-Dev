@@ -1,5 +1,6 @@
 package com.blessing333.stove.modules.post;
 
+import com.blessing333.stove.modules.category.Category;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -20,5 +21,9 @@ public class PostForm {
     private String author;
     @NotBlank
     private String content;
+    @NotBlank
     private boolean published;
+    @NotBlank
+    private Long category;
+    private String thumbnail;
 }

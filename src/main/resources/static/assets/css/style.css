@@ -230,8 +230,9 @@ a:focus {
     min-width: 250px;
     max-width: 250px;
     min-height: 100%;
-    background: lightgrey;
+    background: white;
     transition: all 0.3s;
+    padding-left: 20px;
 }
 
 #sidebar.active {
@@ -276,13 +277,13 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
+/*.dropdown-toggle::after {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 20px;*/
+/*    transform: translateY(-50%);*/
+/*}*/
 
 ul ul a {
     font-size: 0.9em !important;
@@ -302,7 +303,7 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
+a.new-post {
     background: #6d7fcc;
     color: white;
 }
@@ -343,6 +344,7 @@ a.download {
     font-weight: bold;
     color: black;
 }
+
 .transparent-btn {
     background-color: transparent !important;
     background-image: none !important;
@@ -357,9 +359,11 @@ a.download {
 .banner-section {
     margin-bottom: 50px;
     background-image: url(https://t1.daumcdn.net/cfile/tistory/99C9C14D5F64689834);
+    /*background-image: url("/assets/images/default-banner.jpeg");*/
     background-size: cover;
     width: 100%;
     height: 400px;
+
     background-repeat: no-repeat;
 }
 .post-title{
@@ -380,24 +384,21 @@ a.download {
 .post-list-section {
     padding-left: 0;
     margin-bottom: 0;
-
 }
 .post-thumbnail{
     display: flex;
     justify-content: center;
 }
 .post-thumbnail img{
-    object-fit: cover;
+    width: 270px;
+    height: 200px;
+    object-fit: none;
 }
-/*.post-info{*/
-/*    justify-content: center;*/
-/*}*/
-/*.post-thumbnail{*/
-/*    justify-content: flex-end;*/
-/*}*/
+
 /* ---------------------------------------------------
     글 작성 페이지 STYLE
 ----------------------------------------------------- */
+
 .dashboard_menu .nav-tabs li.nav-item a.active {
     background-color: #FF324D;
     color: #fff;
@@ -424,7 +425,19 @@ a.download {
 .dashboard_content .card-body p:last-child {
     margin: 0;
 }
+.post-form{
+    padding-left: 20px;
+}
+.thumbnail-header{
+    margin-bottom:0;
+}
+.thumbnail-header label{
+    padding-left: 20px;
+}
+#category-selection{
+    display: block;
 
+}
 /* ---------------------------------------------------
     게시글 조회 화면 STYLE
 ----------------------------------------------------- */
@@ -478,7 +491,6 @@ a.download {
 }
 .comment-form{
     margin-bottom: 50px;
-
 }
 
 .comment-form button{
@@ -501,5 +513,46 @@ a.download {
 .form-icon-button{
     display: inline;
 }
+.category{
+    font-size: 16px;
+    color: slategray;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
 
+.post_img_box {
+    padding: 8px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.post_img_box img{
+    width: 275px;
+    height: 200px;
+}
+.custom-file-label, .custom-file, .custom-file-input {
+    margin-left: 10px;
+}
 
+/* ---------------------------------------------------
+    관리자 화면 STYLE
+----------------------------------------------------- */
+.section-header{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.category-list-section {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.required {
+    color: #ff0000;
+}
+.admin-side-menu img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

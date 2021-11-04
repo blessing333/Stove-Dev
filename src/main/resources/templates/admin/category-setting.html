@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body class="bg-light">
+
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-3 admin-side-menu">
+            <div th:replace="/admin/admin-fragment.html :: settings-menu('category')"></div>
+        </div>
+        <div class="col-9">
+            <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                <span th:text="${message}">메시지</span>
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="row">
+                <h2 class="col-sm-12 section-header">카테고리 관리</h2>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="category-list-section list-group">
+                        <ul class="list_none list-group category-list-section mt-4">
+                            <li th:each="category: ${categoryList}" class="list-group-item list-group-item-action">
+                                <div class="post_block row">
+                                    <div class="col-md-6">
+                                        <text th:text="${category.categoryName}">카테고리 이름</text>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form  th:action="@{'/category/'+${category.id}}" th:method="delete">
+                                            <button class="btn btn-outline-danger" type="submit"><i class="fas fa-trash-alt"></i>삭제</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="row section-header">
+                        <h2 class="col-sm-12" >카테고리 추가</h2>
+                    </div>
+
+                    <form class="form" th:action="@{/category}" method="post" th:object="${categoryForm}">
+                        <div class="form-group">
+                            <label for="category-name">카테고리 이름<span class="required">*</span></label>
+                            <input id="category-name" type="text"  class="form-control" th:field="*{categoryName}"
+                                   aria-describedby="newPasswordHelp" required min="1" max="50">
+                            <small id="newPasswordHelp" class="form-text text-muted">
+                                추가할 카테고리를 입력하세요. 최대 50자 까지 가능합니다.
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-outline-primary" type="submit" >카테고리 추가</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

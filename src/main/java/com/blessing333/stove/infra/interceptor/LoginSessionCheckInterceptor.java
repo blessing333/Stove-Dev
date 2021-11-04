@@ -18,7 +18,6 @@ import static com.blessing333.stove.modules.user.UserConfig.*;
 * @version 0.0.0
 * 작성일 2021/10/29
 **/
-@Slf4j
 public class LoginSessionCheckInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

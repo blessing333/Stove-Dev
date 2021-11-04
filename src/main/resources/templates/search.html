@@ -12,10 +12,9 @@
     <!-- Main Content  -->
     <div id="content">
         <nav th:replace="fragments.html::header"></nav>
-        <div class="banner-section"></div>
         <div class="container">
             <div class="main-section">
-                <h5 class="post-list-header"> 전체 게시글 (<span th:text="${postPage.getTotalElements()}"></span>)</h5>
+                <h5 class="post-list-header"> <span th:text="|${keyword} 검색결과|"> 검색결과 </span>(<span th:text="${postPage.getTotalElements()}"></span>)</h5>
                 <div class="line"></div>
                 <div class="post-list-section list-group">
                     <ul class="list_none list-group-flush post-list-section mt-4" id="post-list">
@@ -23,7 +22,7 @@
                             <div class="post_block row">
                                 <div class="col-md-9 post-info">
                                     <div class="category">
-                                        <span><u><a th:href="@{'/post/category/'+${post.category.id}}" th:text="${post.category.categoryName}"></a></u></span>
+                                        <span><u><a href="" th:text="${post.category.categoryName}"></a></u></span>
                                     </div>
                                     <a th:href="@{'/post/'+${post.id}}"><span class="post-title" th:text="${post.title}">제목</span></a>
                                     <p class="post-date">
@@ -42,37 +41,32 @@
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-sm-10">
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${!postPage.hasPrevious()}? disabled">
-                            <a th:href="@{'/?desc&page=' + ${postPage.getNumber() - 1}}"
-                               class="page-link" tabindex="-1" aria-disabled="true">
-                                Previous
-                            </a>
-                        </li>
-                        <li class="page-item" th:classappend="${i == postPage.getNumber()}? active"
-                            th:each="i: ${#numbers.sequence(0, postPage.getTotalPages() - 1)}">
-                            <a th:href="@{'/?desc&page=' + ${i}}"
-                               class="page-link" href="#" th:text="${i + 1}">1</a>
-                        </li>
-                        <li class="page-item" th:classappend="${!postPage.hasNext()}? disabled">
-                            <a th:href="@{'/?desc&page=' + ${postPage.getNumber() + 1}}"
-                               class="page-link">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="row justify-content-center" th:if="${posts.size()>0}">
+                <div>
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:classappend="${!postPage.hasPrevious()}? disabled">
+                                <a th:href="@{'/search/' +${keyword} + '?desc&page=' +${postPage.getNumber() - 1}}"
+                                   class="page-link" tabindex="-1" aria-disabled="true">
+                                    Previous
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="${i == postPage.getNumber()}? active"
+                                th:each="i: ${#numbers.sequence(0, postPage.getTotalPages() - 1)}">
+                                <a th:href="@{'/search/'+${keyword} +'?desc&page=' +${i}}"
+                                   class="page-link" href="#" th:text="${i + 1}">1</a>
+                            </li>
+                            <li class="page-item" th:classappend="${!postPage.hasNext()}? disabled">
+                                <a th:href="@{'/search/'+${keyword} + '?desc&page='+${postPage.getNumber() + 1}}"
+                                   class="page-link">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
-
-    <div>
-</div>
-
     </div>
 </div>
 <div th:replace="fragments.html::common-js"></div>

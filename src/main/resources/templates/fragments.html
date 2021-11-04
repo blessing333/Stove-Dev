@@ -8,7 +8,6 @@
     <!-- SITE TITLE -->
     <title>Stove Blog</title>
     <!-- CSS   -->
-    <link rel="stylesheet" href=/node_modules/summernote/dist/summernote-lite.css>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,35 +28,18 @@
 </div>
 
 <nav th:fragment="side-menu" id="sidebar">
-    <ul class="list-unstyled components">
+    <ul class="list-unstyled components list-group-flush" >
         <p>카테고리 전체보기</p>
-        <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">Portfolio</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
+        <li th:each="category:${categoryList}" class="list-group-item-action">
+            <a th:href="@{'/post/category/'+${category.id}}" th:text="${category.categoryName}"></a>
         </li>
     </ul>
     <ul class="list-unstyled CTAs">
         <li>
-            <a th:href="@{/post/post-form}" class="download">새 글 작성</a>
+            <a th:href="@{/post/post-form}" class="new-post">새 글 작성</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/category}" class="new-post">관리자모드</a>
         </li>
     </ul>
 </nav>
@@ -73,9 +55,9 @@
             <a th:href="@{/}">Stove Dev Camp</a>
         </div>
         <div class="col-md-4" style="display: flex; justify-content: flex-end">
-            <form>
+            <form class="form-inline" method="get" th:action="@{/search}">
                 <div class="input-group">
-                    <input class="form-control" placeholder="검색 내용을 입력하세요." required="" type="text">
+                    <input class="form-control" name="keyword" placeholder="검색 내용을 입력하세요." type="text">
                     <button type="submit" class="btn transparent-btn"><i class="fas fa-search fa-2x"></i></button>
                 </div>
             </form>
@@ -109,7 +91,7 @@
     $(window).on('load', function() {
         setTimeout(function(){
             $('.preloader').addClass('preloader-deactivate');
-        }, 350);
+        }, 300);
     });
 </script>
 

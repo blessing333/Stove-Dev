@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="settings-menu(currentMenu)" class="list-group">
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'category'}? active" th:href="@{/settings/profile}">카테고리 관리</a>
+    <a class="list-group-item list-group-item-action" th:href="@{/}">블로그로 이동</a>
+</div>

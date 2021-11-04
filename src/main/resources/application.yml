@@ -13,7 +13,7 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-      #show_sql: true
+      show_sql: true
       format_sql: true
   h2:
     console:
@@ -21,8 +21,8 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
-  #org.hibernate.type: trace
+
 server:
   port: 65000
   tomcat:
-    max-http-form-post-size: 5MB
+    max-http-form-post-size: 10MB

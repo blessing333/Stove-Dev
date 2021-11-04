@@ -1,11 +1,10 @@
 package com.blessing333.stove.modules.post;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.blessing333.stove.modules.category.Category;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
 *
@@ -19,6 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = "id")
 
 public class Post {
     @Id
@@ -27,9 +27,11 @@ public class Post {
 
     private String title;
 
-    @Lob @Basic(fetch = FetchType.EAGER)
+    @Lob
     private String content;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Category category;
 
     private String author;
 
@@ -37,23 +39,28 @@ public class Post {
 
     private boolean published;
 
-    public static Post createNewPost(String title,String content,String author,boolean published){
+    @Lob @Basic(fetch = FetchType.EAGER)
+    private String thumbnail;
+
+    public static Post createNewPost(String title,String content,String author,boolean published,Category category,String thumbnail){
         Post instance = new Post();
         instance.setTitle(title);
         instance.setContent(content);
         instance.setAuthor(author);
         instance.setCreatedDate(LocalDateTime.now());
         instance.setPublished(published);
+        instance.setCategory(category);
+        instance.setThumbnail(thumbnail);
         return instance;
     }
 
-    public void editPostInformation(String title,String content,String author,boolean published){
+    public void editPostInformation(String title,String content,String author,boolean published, Category category, String thumbnail){
         setTitle(title);
         setContent(content);
         setAuthor(author);
         setCreatedDate(LocalDateTime.now());
         setPublished(published);
+        setCategory(category);
+        setThumbnail(thumbnail);
     }
-
-
 }
