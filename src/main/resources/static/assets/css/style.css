@@ -358,8 +358,8 @@ a.new-post {
 ----------------------------------------------------- */
 .banner-section {
     margin-bottom: 50px;
-    background-image: url(https://t1.daumcdn.net/cfile/tistory/99C9C14D5F64689834);
-    /*background-image: url("/assets/images/default-banner.jpeg");*/
+    /*background-image: url(https://t1.daumcdn.net/cfile/tistory/99C9C14D5F64689834);*/
+    background-image: url("/assets/images/default-banner.jpeg");
     background-size: cover;
     width: 100%;
     height: 400px;
