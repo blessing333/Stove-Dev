@@ -44,6 +44,7 @@ class PostControllerTest {
     void addNewPost() throws Exception{
         PostForm postForm =  postCreateFactory.createPostForm();
         mockMvc.perform(post("/post")
+                .param("category",postForm.getCategory().toString())
                 .param("title",postForm.getTitle())
                 .param("author", postForm.getAuthor())
                 .param("content",postForm.getContent())

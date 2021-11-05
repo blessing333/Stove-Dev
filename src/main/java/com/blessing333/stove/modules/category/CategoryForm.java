@@ -1,6 +1,8 @@
 package com.blessing333.stove.modules.category;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 /**
@@ -12,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 * 작성일 2021/11/05
 **/
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryForm {
     @NotBlank
     String categoryName;
