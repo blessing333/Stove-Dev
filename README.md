@@ -2,6 +2,8 @@
 Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 ![메인화면](https://user-images.githubusercontent.com/65841596/140411651-1c8f78c8-62b5-4119-85a2-6be51e7a5fd0.jpg)
 
+## :clipboard: 실행방법
+별도의 설정 없이 프로젝트 클론 후 실행
 
 ## :clipboard: 개발환경
 * IntelliJ
