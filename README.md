@@ -64,8 +64,8 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 
 ## :link: 프로젝트를 하면서 고민했던 점
 ### 프로젝트 구조에 대한 고민
-   1. 컨트롤러, DTO, Entity, service로 분할
-   
+
+   1. 컨트롤러, DTO, Entity, service로 분할   
    -- Project  
    ---- controller  
    ---- dto  
@@ -86,13 +86,12 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
    
    3. 도메인 모듈 단위로 분할   
       --Project   
-      ---- infra
+      ---- infra   
       ------ config   
       ---- modules   
       ------ main   
       ------ admin   
       ------ post   
-      ------ config   
       ------ category   
       ------ comment   
       
