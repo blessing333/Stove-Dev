@@ -63,7 +63,7 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 
 
 ## :link: 프로젝트를 하면서 고민했던 점
-- 프로젝트 구조에 대한 고민
+### 프로젝트 구조에 대한 고민
    1. 컨트롤러, DTO, Entity, service로 분할
    
    -- Project  
@@ -80,12 +80,13 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
      ---- main   
      ---- admin   
      ---- post   
-     ---- config   
+     ---- config  
+     
    문제점 : category는 별도의 페이지를 형성하지 않으며, main, admin, post 모두 카테고리 관련 기능을 포함하고 있음
    
    3. 도메인 모듈 단위로 분할   
       --Project   
-      ---- infra   
+      ---- infra
       ------ config   
       ---- modules   
       ------ main   
@@ -94,4 +95,18 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
       ------ config   
       ------ category   
       ------ comment   
+      
+   최종적으로 도메인 모듈 단위로 분할하는 방법을 선택.
    
+   
+### Post 와 Comment의 방향 관계 설정
+현재 Post와 Comment의 관계는 Comment만 Post를 참조하고 있는 단 방향 관계임.
+따라서 게시글 조회 화면에서 게시글 정보를 가져오기 위해 2개의 쿼리가 발생.
+1. select post from Post where id = ?
+1. select comment from Comment where post_id = ?   
+
+반면에 Post가 comment에 대한 참조를 가지고 있을 경우(List<Comment> comments) Post에 대한 쿼리만 수행하여도 게시글 조회 화면에 필요한 모든 정보를 가지고 올 수 있기에 성능상의 이점을 얻을 수 있음.   
+하지만 이럴 경우 서로가 서로를 참조하는 순환 참조 구조를 가지게 됨 Post <-> Comments
+   
+### 프로젝트 구조에 대한 고민
+
