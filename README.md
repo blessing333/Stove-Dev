@@ -5,6 +5,10 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 ## :clipboard: 실행방법
 별도의 설정 없이 프로젝트 클론 후 실행
 
+## :clipboard: DB 웹 콘솔 실행방법
+1. http://localhost:65000/h2-console/ 접속
+2. JDBCurl = jdbc:h2:mem:stove 입력 후 연결
+
 ## :clipboard: 개발환경
 * IntelliJ
 * GitHub
@@ -57,3 +61,37 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 
 ![ERD](https://user-images.githubusercontent.com/65841596/140423482-1fec84e9-95a3-45fe-8cbb-41b214806bb7.png)
 
+
+## :link: 프로젝트를 하면서 고민했던 점
+- 프로젝트 구조에 대한 고민
+   1. 컨트롤러, DTO, Entity, service로 분할
+   
+   -- Project  
+   ---- controller  
+   ---- dto  
+   ---- entity  
+   ---- service  
+   ---- config  
+      
+   문제점 : 후에 새로운 기능과 도메인이 더 추가 될 수록 프로젝트에 대한 전체적인 기능과 구조를 한눈에 파악하기 힘듦  
+   
+   2. 페이지 단위로 분할   
+     -- Project   
+     ---- main   
+     ---- admin   
+     ---- post   
+     ---- config   
+   문제점 : category는 별도의 페이지를 형성하지 않으며, main, admin, post 모두 카테고리 관련 기능을 포함하고 있음
+   
+   3. 도메인 모듈 단위로 분할   
+      --Project   
+      ---- infra   
+      ------ config   
+      ---- modules   
+      ------ main   
+      ------ admin   
+      ------ post   
+      ------ config   
+      ------ category   
+      ------ comment   
+   
