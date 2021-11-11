@@ -82,7 +82,7 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
      ---- post   
      ---- config  
      
-   문제점 : category는 별도의 페이지를 형성하지 않으며, main, admin, post 모두 카테고리 관련 기능을 포함하고 있음
+   문제점 : category는 별도의 페이지를 형성하지 않으며, main, admin, post 모두 카테고리 관련 기능을 포함하고 있음. common 디렉터리를 만들고 category를 넣어주는 방법도 있지만, 도메인이 더 추가되고 도메인간 연관 관계가 추가될수록 common디렉터리가 가지는 책임과 크기가 늘어남.
    
    3. 도메인 모듈 단위로 분할   
       --Project   
@@ -107,5 +107,9 @@ Stove Dev Camp 2번 과제를 위한 레포지토리입니다.
 반면에 Post가 comment에 대한 참조를 가지고 있을 경우(List<Comment> comments) Post에 대한 쿼리만 수행하여도 게시글 조회 화면에 필요한 모든 정보를 가지고 올 수 있기에 성능상의 이점을 얻을 수 있음.   
 하지만 이럴 경우 서로가 서로를 참조하는 순환 참조 구조를 가지게 됨 Post <-> Comments
    
-### 프로젝트 구조에 대한 고민
+### ISP,SRP,DIP에 대한 고민
+현재 PostService는 게시글에 관련된 기능만을 제공하기에 하나의 책임을 가진것처럼 보인다.   
+반면에 다른 관점에서 본다면 게시글 생성, 게시글 삭제, 게시글 조회, 게시글 수정 같은 4개의 책임을 가진다고도 볼 수 있다.
+이럴 경우 각 기능에 대하여 PostCreateInterface와 구현체, PostDeleteInterface와 구현체, PostQueryInterface와 구현체, PostUpdateInterface와 구현체를 생성하여 PostService가 각 인터페이스를 참조하고 스프링 빈으로 구현체를 주입받는다면 ISP,SRP,DIP를 만족시킬 수 있다.   
+하지만 PostService의 기능이 단순함에 비해 4개의 인터페이스와 4개의 구현체를 추가로 작성해야한다.
 
